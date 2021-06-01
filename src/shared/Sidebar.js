@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { Link, withRouter } from 'react-router-dom';
-import { Collapse, Dropdown } from 'react-bootstrap';
+import { Dropdown } from 'react-bootstrap';
 import { Trans } from 'react-i18next';
 
 class Sidebar extends Component {
@@ -67,8 +67,8 @@ class Sidebar extends Component {
                   <span className="count bg-success"></span>
                 </div>
                 <div className="profile-name">
-                  <h5 className="mb-0 font-weight-normal"><Trans>Henry Klein</Trans></h5>
-                  <span><Trans>Gold Member</Trans></span>
+                  <h5 className="mb-0 font-weight-normal">Henry Klein</h5>
+                  <span>Membro Padrão</span>
                 </div>
               </div>
               <Dropdown alignRight>
@@ -113,49 +113,34 @@ class Sidebar extends Component {
             </div>
           </li>
           <li className="nav-item nav-category">
-            <span className="nav-link">Geral</span>
+            <span className="nav-link">CHATBOT</span>
           </li>
           <li className={this.isPathActive('/dashboard') ? 'nav-item menu-items active' : 'nav-item menu-items'}>
             <Link className="nav-link" to="/dashboard">
               <span className="menu-icon"><i className="mdi mdi-speedometer"></i></span>
-              <span className="menu-title"><Trans>Dashboard</Trans></span>
+              <span className="menu-title">Controle de Sessão</span>
             </Link>
-          </li>
-          <li className="nav-item nav-category">
-            <span className="nav-link">Meus serviços</span>
-          </li>
-          <li className={this.isPathActive('/charts') ? 'nav-item menu-items active' : 'nav-item menu-items'}>
-            <div className={this.state.chartsMenuOpen ? 'nav-link menu-expanded' : 'nav-link'} onClick={() => this.toggleMenuState('chartsMenuOpen')} data-toggle="collapse">
-              <span className="menu-icon">
-                <i className="mdi mdi-chart-bar"></i>
-              </span>
-              <span className="menu-title"><Trans>Chatbot</Trans></span>
-              <i className="menu-arrow"></i>
-            </div>
-            <Collapse in={this.state.chartsMenuOpen}>
-              <div>
-                <ul className="nav flex-column sub-menu">
-                  <li className="nav-item"> <Link className={this.isPathActive('/charts/chart-js') ? 'nav-link active' : 'nav-link'} to="/charts/chart-js"><Trans>Iniciar Sessão</Trans></Link></li>
-                  <li className="nav-item"> <Link className={this.isPathActive('/charts/chart-js') ? 'nav-link active' : 'nav-link'} to="/charts/chart-js"><Trans>Cadastro de Atendente</Trans></Link></li>
-                  <li className="nav-item"> <Link className={this.isPathActive('/charts/chart-js') ? 'nav-link active' : 'nav-link'} to="/charts/chart-js"><Trans>Cadastro de Departamento</Trans></Link></li>
-                  <li className="nav-item"> <Link className={this.isPathActive('/charts/chart-js') ? 'nav-link active' : 'nav-link'} to="/charts/chart-js"><Trans>Personalizar Mensagens</Trans></Link></li>
-                </ul>
-              </div>
-            </Collapse>
-          </li>
-          <li className={this.isPathActive('/home') ? 'nav-item menu-items active' : 'nav-item menu-items'}>
-            <Link className="nav-link" to="/home">
-              <span className="menu-icon"><i className="mdi mdi-home"></i></span>
-              <span className="menu-title">Mk-Edge</span>
-            </Link>
-          </li>
-          <li className="nav-item nav-category">
-            <span className="nav-link">Financeiro</span>
           </li>
           <li className={this.isPathActive('/dashboard') ? 'nav-item menu-items active' : 'nav-item menu-items'}>
             <Link className="nav-link" to="/dashboard">
               <span className="menu-icon"><i className="mdi mdi-speedometer"></i></span>
-              <span className="menu-title"><Trans>Minhas Faturas</Trans></span>
+              <span className="menu-title">Person. Mensagens</span>
+            </Link>
+          </li>
+          <li className={this.isPathActive('/dashboard') ? 'nav-item menu-items active' : 'nav-item menu-items'}>
+            <Link className="nav-link" to="/dashboard">
+              <span className="menu-icon"><i className="mdi mdi-speedometer"></i></span>
+              <span className="menu-title">Cadast. Atendentes</span>
+            </Link>
+          </li>
+
+          <li className="nav-item nav-category">
+            <span className="nav-link">FINANCEIRO</span>
+          </li>
+          <li className={this.isPathActive('/dashboard') ? 'nav-item menu-items active' : 'nav-item menu-items'}>
+            <Link className="nav-link" to="/dashboard">
+              <span className="menu-icon"><i className="mdi mdi-speedometer"></i></span>
+              <span className="menu-title">Minhas Faturas</span>
             </Link>
           </li>
         </ul>
