@@ -4,10 +4,14 @@ import { Link } from 'react-router-dom';
 import { useAuth } from '../hooks/auth';
 
 export default function Navbar() {
-  const { user } = useAuth();
+  const { user, signOut } = useAuth();
 
   function toggleOffcanvas() {
     document.querySelector('.sidebar-offcanvas').classList.toggle('active');
+  }
+
+  function handleLogout() {
+    signOut();
   }
 
   return (
@@ -25,25 +29,12 @@ export default function Navbar() {
             <Dropdown.Toggle as="a" className="nav-link cursor-pointer no-caret">
               <div className="navbar-profile">
                 <img className="img-xs rounded-circle" src={require('../assets/images/faces/face15.jpg')} alt="profile" />
-                <p className="mb-0 d-none d-sm-block navbar-profile-name">{user.name}</p>
+                <p className="mb-0 d-none d-sm-block navbar-profile-name">{user?.name}</p>
                 <i className="mdi mdi-menu-down d-none d-sm-block"></i>
               </div>
             </Dropdown.Toggle>
 
             <Dropdown.Menu className="navbar-dropdown preview-list navbar-profile-dropdown-menu">
-              <h6 className="p-3 mb-0">Profile</h6>
-              <Dropdown.Divider />
-              <Dropdown.Item href="!#" onClick={evt => evt.preventDefault()} className="preview-item">
-                <div className="preview-thumbnail">
-                  <div className="preview-icon bg-dark rounded-circle">
-                    <i className="mdi mdi-settings text-success"></i>
-                  </div>
-                </div>
-                <div className="preview-item-content">
-                  <p className="preview-subject mb-1">Settings</p>
-                </div>
-              </Dropdown.Item>
-              <Dropdown.Divider />
               <Dropdown.Item href="!#" onClick={evt => evt.preventDefault()} className="preview-item">
                 <div className="preview-thumbnail">
                   <div className="preview-icon bg-dark rounded-circle">
@@ -51,11 +42,9 @@ export default function Navbar() {
                   </div>
                 </div>
                 <div className="preview-item-content">
-                  <p className="preview-subject mb-1">Log Out</p>
+                  <p onClick={handleLogout} className="preview-subject mb-1">Sair</p>
                 </div>
               </Dropdown.Item>
-              <Dropdown.Divider />
-              <p className="p-3 mb-0 text-center">Advanced settings</p>
             </Dropdown.Menu >
           </Dropdown >
         </ul >
