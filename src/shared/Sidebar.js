@@ -1,7 +1,10 @@
 import React, { useEffect, useState, useCallback } from 'react';
 import { Link, withRouter } from 'react-router-dom';
+import { useAuth } from '../hooks/auth';
 
 function Sidebar() {
+  const { user } = useAuth();
+
   const [state, setState] = useState({});
 
   const onRouteChanged = useCallback(() => {
@@ -43,7 +46,7 @@ function Sidebar() {
                 <span className="count bg-success"></span>
               </div>
               <div className="profile-name">
-                <h5 className="mb-0 font-weight-normal">Henry Klein</h5>
+                <h5 className="mb-0 font-weight-normal">{user.name}</h5>
                 <span>Membro Padrão</span>
               </div>
             </div>
