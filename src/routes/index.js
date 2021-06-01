@@ -11,6 +11,7 @@ const AuthScreen = lazy(() => import('../app/pages/AuthScreen'));
 const SessionScreen = lazy(() => import('../app/pages/SessionScreen'));
 const MessageCustomizationScreen = lazy(() => import('../app/pages/MessageCustomizationScreen'));
 const AttendantScreen = lazy(() => import('../app/pages/AttendantScreen'));
+const InvoicesScreen = lazy(() => import('../app/pages/InvoicesScreen'));
 
 export default function Routes() {
   return (
@@ -38,6 +39,14 @@ export default function Routes() {
           isFullPageLayout
           path="/attendants"
           component={AttendantScreen}
+        />
+
+        <Router
+          exact
+          isPrivate
+          isFullPageLayout
+          path="/invoices"
+          component={InvoicesScreen}
         />
 
         <Router
