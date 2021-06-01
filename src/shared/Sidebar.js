@@ -46,7 +46,7 @@ function Sidebar() {
                 <span className="count bg-success"></span>
               </div>
               <div className="profile-name">
-                <h5 className="mb-0 font-weight-normal">{user.name}</h5>
+                <h5 className="mb-0 font-weight-normal">{user?.name}</h5>
                 <span>Membro Padrão</span>
               </div>
             </div>
