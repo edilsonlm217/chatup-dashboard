@@ -47,7 +47,7 @@ export default function Route({
 
               <div className="main-panel">
                 <div className="content-wrapper">
-                  <Redirect push={true} to={isPrivate ? '/login' : '/home'} />
+                  <Redirect to={isPrivate ? '/login' : '/session'} />
                 </div>
 
                 {isFullPageLayout === true && <Footer />}
