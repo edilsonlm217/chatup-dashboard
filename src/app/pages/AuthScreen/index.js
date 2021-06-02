@@ -8,9 +8,7 @@ function AuthScreen() {
   const [login, setLogin] = useState('');
   const [password, setPassword] = useState('');
 
-  const { user, signIn } = useAuth();
-
-  console.log(user);
+  const { signIn } = useAuth();
 
   function handleSubmit(event) {
     event.preventDefault();
@@ -55,7 +53,7 @@ function AuthScreen() {
                   onClick={handleSubmit}
                   className="btn btn-block btn-primary btn-lg font-weight-medium auth-form-btn"
                 >
-                  CRIAR CONTA
+                  ENTRAR
                 </button>
 
                 <div className="my-2 d-flex justify-content-between align-items-center">
