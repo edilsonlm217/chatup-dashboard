@@ -12,6 +12,8 @@ const SessionScreen = lazy(() => import('../app/pages/SessionScreen'));
 const MessageCustomizationScreen = lazy(() => import('../app/pages/MessageCustomizationScreen'));
 const AttendantScreen = lazy(() => import('../app/pages/AttendantScreen'));
 const InvoicesScreen = lazy(() => import('../app/pages/InvoicesScreen'));
+const QrCodeScreen = lazy(() => import('../app/pages/QrCodeScreen'));
+const ErrorScreen = lazy(() => import('../app/pages/QrCodeScreen/ErrorScreen'));
 
 export default function Routes() {
   return (
@@ -59,6 +61,10 @@ export default function Routes() {
 
         <Router path="/login" component={AuthScreen} />
         <Router path="/register" component={RegisterScreen} />
+
+        {/* Rotas do contexto de QR Code */}
+        <Router path="/scan" component={QrCodeScreen} isPrivate noStyle />
+        <Router path="/error" component={ErrorScreen} isPrivate noStyle />
 
         <Redirect to="/login" />
       </Switch>
