@@ -3,8 +3,6 @@ import React, { useState, useEffect } from 'react';
 import api from '../../../services/api';
 import Modal from 'simple-react-modal';
 import { toast } from 'react-toastify';
-import { useHistory } from "react-router-dom";
-// import { Picker } from 'emoji-mart';
 
 import edit_icon from '../../../assets/icons/edit_icon_for_messages.svg'
 import { useAuth } from '../../../hooks/auth';
@@ -20,7 +18,6 @@ export default function MessageCustomizationScreen() {
   const [modalMsg, setModalMsg] = useState({});
 
   const { user } = useAuth();
-  const history = useHistory();
 
   function handleEdit(message) {
     setModalMsg(message);
@@ -146,13 +143,6 @@ export default function MessageCustomizationScreen() {
               className="btn btn-dark btn-fw"
             >Cancelar</button>
           </div>
-
-          {/* <Picker
-            set='apple'
-            showSkinTones={false}
-            theme='dark'
-            title=''
-          /> */}
         </div>
       </Modal>
     </div>
