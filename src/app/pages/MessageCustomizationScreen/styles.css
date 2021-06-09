@@ -1,0 +1,87 @@
+.edit-icon {
+  cursor: pointer;
+}
+
+.edit-icon:hover {
+  cursor: pointer;
+  opacity: 0.5;
+}
+
+.modal-title {
+  padding: 10px;
+  padding-left: 0px;
+  padding-right: 0px;
+}
+
+.text-area {
+  margin: 10;
+  margin-left: 0px;
+  margin-right: 0px;
+  height: max-content;
+  background-color: #2A3038;
+  color: #FFFFFF;
+  white-space: pre-wrap;
+}
+
+.btn-container {
+  display: flex;
+  flex-direction: row;
+  margin-top: 30px;
+  margin-bottom: 15px;
+  gap: 20px;
+  justify-content: flex-end;
+}
+
+.modal-form-label {
+  font-size: 14px;
+  margin-top: 10px;
+  margin-bottom: 10px;
+}
+
+.form-container {
+  display: flex;
+  flex-direction: column;
+}
+
+#tooltip {
+  position: absolute;
+  left: 0px;
+  top: 0px;
+  font-family: Helvetica Neue,Helvetica,Arial,sans-serif;
+  font-style: normal;
+  font-weight: 400;
+  letter-spacing: normal;
+  line-height: 1.42857143;
+  text-align: left;
+  text-align: start;
+  text-shadow: none;
+  text-transform: none;
+  white-space: normal;
+  word-break: normal;
+  word-spacing: normal;
+  word-wrap: normal;
+  font-size: 12px;
+  
+  display: inline-block;
+}
+
+#tooltip.right {
+  margin-left: 5px;
+}
+
+#tooltip.right .tooltip-arrow {
+  top: 50%;
+  left: auto;
+  margin-left: -5px;
+  border-width: 5px 5px 5px 0;
+  border-right-color: #000;
+}
+
+#tooltip .tooltip-label {
+  max-width: 200px;
+  padding: 3px 8px;
+  color: #fff;
+  text-align: center;
+  background-color: #000;
+  border-radius: 4px;
+}
