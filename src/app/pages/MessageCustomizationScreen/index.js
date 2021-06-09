@@ -1,17 +1,61 @@
+/* eslint-disable array-callback-return */
 import React, { useState, useEffect } from 'react';
 import api from '../../../services/api';
+import Modal from 'simple-react-modal';
+import { toast } from 'react-toastify';
+import { useHistory } from "react-router-dom";
+// import { Picker } from 'emoji-mart';
 
 import edit_icon from '../../../assets/icons/edit_icon_for_messages.svg'
 import { useAuth } from '../../../hooks/auth';
 
 import './styles.css';
+import 'emoji-mart/css/emoji-mart.css';
+import 'react-toastify/dist/ReactToastify.css';
 
 export default function MessageCustomizationScreen() {
   const [messages, setMessages] = useState([]);
+
+  const [modalOpen, setModalOpen] = useState(false);
+  const [modalMsg, setModalMsg] = useState({});
+
   const { user } = useAuth();
+  const history = useHistory();
 
   function handleEdit(message) {
-    console.log(message);
+    setModalMsg(message);
+    setModalOpen(true);
+  }
+
+  async function handleUpdateMessage() {
+    const { _id } = modalMsg;
+
+    try {
+      const response = await api.put(`messages/${user.id}/${_id}`, {
+        newMsg: modalMsg.message
+      });
+
+      messages.map((obj, index) => {
+        if (obj._id === response.data._id) {
+          messages[index] = response.data;
+        }
+      });
+
+      setModalOpen(false);
+
+      toast.success(
+        'Mensagem alterada com sucesso', {
+        position: "top-right",
+        autoClose: 3000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: false,
+        draggable: true,
+        progress: undefined,
+      });
+    } catch (error) {
+      console.log(error);
+    }
   }
 
   useEffect(() => {
@@ -62,6 +106,55 @@ export default function MessageCustomizationScreen() {
           </table>
         </div>
       </div>
+
+      <Modal
+        containerStyle={{ background: '#191C24', width: 1000 }}
+        closeOnOuterClick={true}
+        show={modalOpen}
+        onClose={() => setModalOpen(false)}
+      >
+        <div>
+          <header>
+            <h3 className="modal-title">{modalMsg.option}</h3>
+            <p style={{ color: '#6C7293' }}>{modalMsg.description}</p>
+          </header>
+
+          <div className='form-container'>
+            <strong className='modal-form-label'>Mensagem</strong>
+            <textarea
+              onChange={(e) => setModalMsg({
+                ...modalMsg,
+                message: e.target.value
+              })}
+              readOnly={false}
+              value={modalMsg.message}
+              rows={10}
+              className='text-area'
+            />
+          </div>
+
+          <div className="btn-container">
+            <button
+              type="button"
+              className="btn btn-primary btn-fw"
+              onClick={() => handleUpdateMessage(false)}
+            >Salvar</button>
+
+            <button
+              onClick={() => setModalOpen(false)}
+              type="button"
+              className="btn btn-dark btn-fw"
+            >Cancelar</button>
+          </div>
+
+          {/* <Picker
+            set='apple'
+            showSkinTones={false}
+            theme='dark'
+            title=''
+          /> */}
+        </div>
+      </Modal>
     </div>
   );
 }
