@@ -16,27 +16,3 @@
   background-color: #090A0D;
   cursor: pointer;
 }
-
-.modal-content {
-  display: flex;
-  flex-direction: column;
-  background-color: #191C24;
-  padding: 25px;
-}
-
-.modal-subtitle {
-  color: #6C7293;
-  padding-bottom: 8px;
-}
-
-.modal-title {
-  font-size: 18px;
-}
-
-.modal-btns-container {
-  margin-top: 10px;
-  display: flex;
-  flex-direction: row;
-  gap: 20px;
-  justify-content: flex-end;
-}
