@@ -8,6 +8,7 @@ import Sidebar from '../shared/Sidebar';
 import Footer from '../shared/Footer';
 
 export default function Route({
+  noStyle = false,
   isPrivate = false,
   isFullPageLayout = false,
   component: Component, ...rest
@@ -18,6 +19,10 @@ export default function Route({
     <ReactDOMRoute
       {...rest}
       render={() => {
+        if (noStyle) {
+          return <Component />
+        }
+
         if (isPrivate === !!user) {
           return (
             <div className="container-scroller">
