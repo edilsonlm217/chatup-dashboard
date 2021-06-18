@@ -16,3 +16,35 @@
   background-color: #090A0D;
   cursor: pointer;
 }
+
+.session-card {
+  background-color: #191C24;
+  max-width: 350px;
+  /* height: 100px; */
+  padding: 15px;
+}
+
+.session-card-header {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+
+.session-card-options {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  margin-top: 25px;
+}
+
+.action_container {
+  display: flex;
+  gap: 10px;
+}
+
+.modal-btns {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-end;
+  gap: 10px;
+}
