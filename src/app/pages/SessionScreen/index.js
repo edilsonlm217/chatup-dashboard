@@ -20,6 +20,7 @@ export default function SessionScreen() {
   const [session, setSession] = useState(null);
   const [wppNumber, setWppNumber] = useState('');
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const [connectingIndicator, setConnectingIndicator] = useState(false);
 
   const [isLoading, setIsLoading] = useState(false);
 
@@ -40,6 +41,7 @@ export default function SessionScreen() {
     const socket = io(`http://localhost:3333/`, {
       query: {
         userId: user.id,
+        phoneNumber: wppNumber,
       }
     });
 
@@ -65,12 +67,24 @@ export default function SessionScreen() {
     });
   }
 
-  function desconnectSession() {
-    // TODO chamada a api para desconectar um bot
+  async function desconnectSession() {
+    await api.post(`venom/session/${user.id}`, {
+      action: 'disconnect'
+    });
+
+    fetchSession();
   }
 
-  function connectSession() {
-    // TODO chamada a api para conectar um bot
+  async function connectSession() {
+    setConnectingIndicator(true);
+
+    await api.post(`venom/session/${user.id}`, {
+      action: 'connect'
+    }, { timeout: 60000 });
+
+    fetchSession();
+
+    setConnectingIndicator(false);
   }
 
   function handleCreateSession() {
@@ -104,7 +118,7 @@ export default function SessionScreen() {
       setSession(response.data);
 
     } catch (error) {
-      console.log(error);
+      setSession(null);
     }
   }
 
@@ -118,21 +132,21 @@ export default function SessionScreen() {
         <h3 className="page-title">Controle de Sessão</h3>
       </div>
 
-      {!session &&
+      {session === null && (
         <div className="card" onClick={() => setIsModalOpen(true)}>
           Iniciar sessão
           <span className="menu-icon">
             <i style={{ color: '#00D25B' }} className="mdi mdi-plus-circle"></i>
           </span>
         </div>
-      }
+      )}
 
-      {session &&
+      {session !== null && (
         <div className='session-card'>
           <div className='session-card-header'>
             <div>
               <small className='text-muted'>Whatsapp</small>
-              <h4>36483445</h4>
+              <h4>{session.phoneNumber}</h4>
             </div>
 
             <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'flex-end' }}>
@@ -144,7 +158,7 @@ export default function SessionScreen() {
               </small>
 
               <small>
-                {`Bateria: ${session.getBatteryLevel}%`}
+                {session.getBatteryLevel !== null ? `Bateria: ${session.getBatteryLevel}%` : 'Bateria: Não foi possível obter'}
               </small>
             </div>
 
@@ -155,20 +169,28 @@ export default function SessionScreen() {
               type="button"
               className="btn btn-outline-info btn-fw"
               onClick={session.isConnected ? desconnectSession : connectSession}
-            >{session.isConnected ? 'Desconectar' : 'Conectar'}</button>
+            >
+              {session.isConnected ? 'Desconectar' : 'Conectar'}
+              <Loader
+                type="Oval"
+                color="#191C24"
+                height={20}
+                width={20}
+                visible={connectingIndicator}
+              />
+            </button>
 
             <div className='action_container'>
               <img src={delete_icon} alt='delete_icon' />
             </div>
           </div>
         </div>
-      }
+      )}
 
       <Modal
         containerStyle={{ background: '#191C24', width: 600 }} //changes styling on the inner content area
         closeOnOuterClick={true}
         show={isModalOpen}
-      // onClose={this.close.bind(this)}
       >
         <div style={{ marginTop: 20 }}>
           <h4>Novo Dispositivo</h4>
