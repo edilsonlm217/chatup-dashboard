@@ -19,7 +19,7 @@ export default function AttendantScreen() {
           <div className="col-md-5 grid-margin stretch-card">
             <div className="card">
               <div className="card-body">
-                <h4 className="card-title">Lista de departamentos</h4>
+                <h5 className="card-title">Lista de departamentos</h5>
 
                 <div className="table-responsive">
                   <table className="table">
@@ -48,7 +48,7 @@ export default function AttendantScreen() {
           <div className="col-md-7 grid-margin stretch-card">
             <div className="card">
               <div className="card-body">
-                <h4 className="card-title">Lista de atendentes</h4>
+                <h5 className="card-title">Lista de atendentes</h5>
 
                 {attendants.length === 0 &&
                   <p className="card-description">
