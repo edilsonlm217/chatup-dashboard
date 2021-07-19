@@ -1,0 +1,6 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" viewBox="0 0 25 25">
+  <g id="Grupo_5" data-name="Grupo 5" transform="translate(-573 -261)">
+    <circle id="Elipse_9" data-name="Elipse 9" cx="12.5" cy="12.5" r="12.5" transform="translate(573 261)" fill="#fc424a"/>
+    <path id="Icon_metro-bin" data-name="Icon metro-bin" d="M5.23,5.583v7.309a.733.733,0,0,0,.731.731h6.578a.733.733,0,0,0,.731-.731V5.583H5.23Zm2.193,6.578H6.692V7.045h.731Zm1.462,0H8.153V7.045h.731Zm1.462,0H9.615V7.045h.731Zm1.462,0h-.731V7.045h.731ZM13.453,3.39H11.077V2.476a.55.55,0,0,0-.548-.548H7.971a.55.55,0,0,0-.548.548V3.39H5.047a.55.55,0,0,0-.548.548v.914H14V3.938a.55.55,0,0,0-.548-.548Zm-3.106,0H8.153V2.668h2.193V3.39Z" transform="translate(576.501 266.072)"/>
+  </g>
+</svg>
