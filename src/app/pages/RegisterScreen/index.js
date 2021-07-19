@@ -7,6 +7,8 @@ import { useHistory } from "react-router-dom";
 import api from '../../../services/api';
 import 'react-toastify/dist/ReactToastify.css';
 
+import './styles.css';
+
 function RegisterScreen() {
   let history = useHistory();
 
@@ -61,43 +63,23 @@ function RegisterScreen() {
   }
 
   return (
-    <div>
-      <div className="d-flex align-items-center auth px-0 h-100">
-        <div className="row w-100 mx-0">
-          <div className="col-lg-4 mx-auto">
-            <div className="card text-left py-5 px-4 px-sm-5">
-              <div className="brand-logo">
+    <div className="content-wrapper ">
+      <div class="d-flex align-items-center auth px-0 h-100">
+        <div class="row w-100 mx-0">
+          <div class="col-lg-4 mx-auto">
+            <div class="card text-left py-5 px-4 px-sm-5">
+              <div class="brand-logo">
                 <img src="http://updata.com.br/chatup.png" alt="logo" />
               </div>
               <h4>Novo aqui?</h4>
-              <h6 className="font-weight-light">
+              <h6 class="font-weight-light">
                 Preencha o formulário abaixo para criar sua conta!
               </h6>
+
               <form className="pt-3">
+                <h5 className="form-section">Dados de autenticação</h5>
                 <div className="form-group">
-                  <label>Nome</label>
-                  <input
-                    placeholder="Nome"
-                    value={name}
-                    onChange={e => setName(e.target.value)}
-                    className="form-control form-control-lg"
-                    type="text"
-                  />
-                </div>
-
-                <div className="form-group">
-                  <label>Empresa</label>
-                  <input
-                    type="text"
-                    className="form-control form-control-lg"
-                    placeholder="Nome da sua empresa"
-                    value={companyName}
-                    onChange={e => setCompanyName(e.target.value)}
-                  />
-                </div>
-
-                <div className="form-group">
-                  <label>CNPJ</label>
+                  <label>CNPJ ou CPF</label>
                   <input
                     type="text"
                     className="form-control form-control-lg"
@@ -108,13 +90,38 @@ function RegisterScreen() {
                 </div>
 
                 <div className="form-group">
-                  <label>Contato</label>
+                  <label>Senha</label>
+                  <input
+                    type="password"
+                    className="form-control form-control-lg"
+                    placeholder="Senha"
+                    value={password}
+                    onChange={e => setPassword(e.target.value)}
+                  />
+                </div>
+              </form>
+
+              <form className="pt-3">
+                <h5 className="form-section">Informações do cliente</h5>
+                <div className="form-group">
+                  <label>Nome</label>
+                  <input
+                    placeholder="Informe seu nome"
+                    value={name}
+                    onChange={e => setName(e.target.value)}
+                    className="form-control form-control-lg"
+                    type="text"
+                  />
+                </div>
+
+                <div className="form-group">
+                  <label>Provedor</label>
                   <input
                     type="text"
                     className="form-control form-control-lg"
-                    placeholder="Número de contato"
-                    value={phoneNumber}
-                    onChange={e => setPhoneNumber(e.target.value)}
+                    placeholder="Nome do seu provedor"
+                    value={companyName}
+                    onChange={e => setCompanyName(e.target.value)}
                   />
                 </div>
 
@@ -130,7 +137,22 @@ function RegisterScreen() {
                 </div>
 
                 <div className="form-group">
-                  <label>Servidor</label>
+                  <label>Telefone</label>
+                  <input
+                    type="text"
+                    className="form-control form-control-lg"
+                    placeholder="Número de contato"
+                    value={phoneNumber}
+                    onChange={e => setPhoneNumber(e.target.value)}
+                  />
+                </div>
+
+              </form>
+
+              <form className="pt-3">
+                <h5 className="form-section">Informações do servidor</h5>
+                <div className="form-group">
+                  <label>IP Público ou Domínio do MK-AUTH</label>
                   <input
                     type="text"
                     className="form-control form-control-lg"
@@ -141,24 +163,13 @@ function RegisterScreen() {
                 </div>
 
                 <div className="form-group">
-                  <label>Porta</label>
+                  <label>Porta de acesso ao banco do MK-AUTH</label>
                   <input
                     type="text"
                     className="form-control form-control-lg"
-                    placeholder="Porta de acesso"
+                    placeholder="Informe porta de acesso ao banco de dados"
                     value={dbPort}
                     onChange={e => setDbPort(e.target.value)}
-                  />
-                </div>
-
-                <div className="form-group">
-                  <label>Senha</label>
-                  <input
-                    type="password"
-                    className="form-control form-control-lg"
-                    placeholder="Senha"
-                    value={password}
-                    onChange={e => setPassword(e.target.value)}
                   />
                 </div>
 
@@ -177,7 +188,7 @@ function RegisterScreen() {
           </div>
         </div>
       </div>
-    </div>
+    </div >
   );
 }
 
