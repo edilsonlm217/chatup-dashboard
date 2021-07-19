@@ -1,6 +1,13 @@
 import React from 'react';
+import { useHistory } from "react-router-dom";
 
 export default function PlansScreen() {
+  const history = useHistory();
+
+  function handleNavigate() {
+    history.push('/payment/2');
+  }
+
   return (
     <div className="content-wrapper">
       <div className="page-header">
@@ -16,6 +23,7 @@ export default function PlansScreen() {
             <button
               type="button"
               className="btn btn-primary btn-fw"
+              onClick={handleNavigate}
             >Assinar agora</button>
           </div>
         </div>
