@@ -6,7 +6,7 @@ import Router from './Router';
 import Spinner from '../shared/Spinner';
 
 const RegisterScreen = lazy(() => import('../app/pages/RegisterScreen'));
-const HomeScreen = lazy(() => import('../app/pages/HomeScreen'));
+const PlansScreen = lazy(() => import('../app/pages/PlansScreen'));
 const AuthScreen = lazy(() => import('../app/pages/AuthScreen'));
 const SessionScreen = lazy(() => import('../app/pages/SessionScreen'));
 const MessageCustomizationScreen = lazy(() => import('../app/pages/MessageCustomizationScreen'));
@@ -15,18 +15,13 @@ const InvoicesScreen = lazy(() => import('../app/pages/InvoicesScreen'));
 const QrCodeScreen = lazy(() => import('../app/pages/QrCodeScreen'));
 const ErrorScreen = lazy(() => import('../app/pages/QrCodeScreen/ErrorScreen'));
 
+const AddressScreen = lazy(() => import('../app/pages/PaymentFlow/AddressScreen'));
+const PaymentScreen = lazy(() => import('../app/pages/PaymentFlow/PaymentScreen'));
+
 export default function Routes() {
   return (
     <Suspense fallback={<Spinner />}>
       <Switch>
-        <Router
-          exact
-          isPrivate
-          isFullPageLayout
-          path="/home"
-          component={HomeScreen}
-        />
-
         <Router
           exact
           isPrivate
@@ -60,10 +55,14 @@ export default function Routes() {
         />
 
         <Router path="/login" component={AuthScreen} />
-        <Router path="/register" component={RegisterScreen} />
+        <Router path="/register" component={RegisterScreen} noStyle />
+
+        <Router path="/plans" component={PlansScreen} isPrivate isFullPageLayout />
+        <Router path="/payment/2" component={AddressScreen} noStyle />
+        <Router path="/payment/3" component={PaymentScreen} noStyle />
 
         {/* Rotas do contexto de QR Code */}
-        <Router path="/scan" component={QrCodeScreen} isPrivate noStyle />
+        <Router path="/scan/:qrCode" component={QrCodeScreen} isPrivate noStyle />
         <Router path="/error" component={ErrorScreen} isPrivate noStyle />
 
         <Redirect to="/login" />
