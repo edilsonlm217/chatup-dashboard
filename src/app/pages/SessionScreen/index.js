@@ -61,8 +61,6 @@ export default function SessionScreen() {
       setIsModalOpen(false);
       setIsLoading(false);
 
-      // TODO fazer chamada a API para criar sessão no wpp
-
       fetchSession();
     });
   }
@@ -85,6 +83,11 @@ export default function SessionScreen() {
     fetchSession();
 
     setConnectingIndicator(false);
+  }
+
+  async function logoutSession() {
+    await api.delete(`venom/session/${user.id}`);
+    fetchSession();
   }
 
   function handleCreateSession() {
@@ -133,7 +136,7 @@ export default function SessionScreen() {
       </div>
 
       {session === null && (
-        <div className="card" onClick={() => setIsModalOpen(true)}>
+        <div className="card cardy" onClick={() => setIsModalOpen(true)}>
           Iniciar sessão
           <span className="menu-icon">
             <i style={{ color: '#00D25B' }} className="mdi mdi-plus-circle"></i>
@@ -180,7 +183,7 @@ export default function SessionScreen() {
               />
             </button>
 
-            <div className='action_container'>
+            <div className='action_container' onClick={logoutSession}>
               <img src={delete_icon} alt='delete_icon' />
             </div>
           </div>
