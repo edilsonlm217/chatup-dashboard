@@ -1,0 +1,17 @@
+.service-list {
+  display: flex;
+  flex-direction: column;
+  gap: 	20px;
+  margin-top: 20px;
+}
+
+.service-row {
+  display: flex;
+  flex-direction: row;
+  gap: 20px;
+}
+
+.service-description {
+  display: flex;
+  flex-direction: column;
+}
