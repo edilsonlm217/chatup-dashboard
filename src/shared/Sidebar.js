@@ -78,9 +78,9 @@ function Sidebar() {
           <span className="nav-link">FINANCEIRO</span>
         </li>
         <li className={isPathActive('/invoices') ? 'nav-item menu-items active' : 'nav-item menu-items'}>
-          <Link className="nav-link" to="/invoices">
+          <Link className="nav-link" to="/plans">
             <span className="menu-icon"><i className="mdi mdi-speedometer"></i></span>
-            <span className="menu-title">Minhas Faturas</span>
+            <span className="menu-title">Assine agora</span>
           </Link>
         </li>
       </ul >
