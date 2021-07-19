@@ -4,11 +4,10 @@ import api from '../../../services/api';
 import Modal from 'simple-react-modal';
 import { toast } from 'react-toastify';
 
-import edit_icon from '../../../assets/icons/edit_icon_for_messages.svg'
+import edit_icon from '../../../assets/icons/edit_icon_for_messages.svg';
 import { useAuth } from '../../../hooks/auth';
 
 import './styles.css';
-import 'emoji-mart/css/emoji-mart.css';
 import 'react-toastify/dist/ReactToastify.css';
 
 export default function MessageCustomizationScreen() {
