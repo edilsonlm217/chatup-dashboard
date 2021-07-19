@@ -52,6 +52,7 @@
     "react-simple-maps": "^1.0.0-beta.0",
     "react-simplemde-editor": "^4.1.0",
     "react-slick": "^0.25.2",
+    "react-stepper-horizontal": "^1.0.11",
     "react-svg-gauge": "^1.0.10",
     "react-table": "^6.10.3",
     "react-tag-autocomplete": "^5.11.1",
