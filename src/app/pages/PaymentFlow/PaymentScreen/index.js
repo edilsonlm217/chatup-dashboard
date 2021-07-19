@@ -1,9 +1,42 @@
-import React from 'react';
+import React, { useState } from 'react';
 import Stepper from 'react-stepper-horizontal';
+import { useHistory } from "react-router-dom";
 
 import './styles.css';
 
 function PaymentScreen() {
+  const history = useHistory();
+  const [cardName, setCardName] = useState('');
+  const [cardNumber, setCardNumber] = useState('');
+  const [cardExpiration, setCardExpiration] = useState('');
+  const [cardCvc, setCardCvc] = useState('');
+  const [creditCardHash, setHash] = useState('');
+
+  async function generateCardHash(cardData) {
+    const PUBLIC_TOKEN = '84EFB588CFAD58116FC279590C81BD0C545F336110FB1023431C4E505AD10D83';
+    const checkout = new window.DirectCheckout(PUBLIC_TOKEN, false);
+
+    await checkout.getCardHash(cardData, cardHash => {
+      setHash(cardHash);
+    }, error => {
+      window.alert('Falha ao gerar o código hash');
+    });
+  }
+
+  async function handleSubscribe() {
+    const { state } = history.location;
+    const cardData = {
+      cardNumber: cardNumber,
+      holderName: cardName,
+      securityCode: cardCvc,
+      expirationMonth: cardExpiration.split('/')[0],
+      expirationYear: cardExpiration.split('/')[1],
+    };
+
+    generateCardHash(cardData);
+  }
+
+  console.log(history.location.state);
   return (
     <div className="full-page-container">
 
@@ -25,7 +58,7 @@ function PaymentScreen() {
             completeColor="#00E71D"
             completeTitleColor="#00E71D"
             activeTitleColor="#FFFFFF"
-            defaultOpacity={0.5}
+            defaultOpacity="0.5"
             titleFontSize={12}
           />
         </div>
@@ -34,6 +67,8 @@ function PaymentScreen() {
           <div className="form-group">
             <label>Nome no cartão</label>
             <input
+              value={cardName}
+              onChange={e => setCardName(e.target.value)}
               placeholder="Informe o nome indicado no cartão"
               type="text"
               className="form-control"
@@ -43,6 +78,8 @@ function PaymentScreen() {
           <div className="form-group">
             <label>Número do cartão</label>
             <input
+              value={cardNumber}
+              onChange={e => setCardNumber(e.target.value)}
               placeholder="Informe o númere do seu cartão"
               type="text"
               className="form-control"
@@ -52,6 +89,8 @@ function PaymentScreen() {
           <div className="form-group">
             <label>Data de Expiração</label>
             <input
+              value={cardExpiration}
+              onChange={e => setCardExpiration(e.target.value)}
               placeholder="MM/AAAA"
               type="text"
               className="form-control"
@@ -61,6 +100,8 @@ function PaymentScreen() {
           <div className="form-group">
             <label>Código CVC</label>
             <input
+              value={cardCvc}
+              onChange={e => setCardCvc(e.target.value)}
               placeholder="Informe o código do cartão"
               type="text"
               className="form-control"
@@ -85,6 +126,7 @@ function PaymentScreen() {
           <p className="text-muted">30 dias grátis</p>
 
           <button
+            onClick={handleSubscribe}
             type="button"
             className="btn btn-primary btn-fw btn-btn-lg"
             style={{ width: '100%', marginTop: 20 }}
