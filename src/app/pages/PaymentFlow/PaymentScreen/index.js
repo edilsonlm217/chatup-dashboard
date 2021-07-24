@@ -1,45 +1,47 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import Stepper from 'react-stepper-horizontal';
-import { useHistory } from "react-router-dom";
+import api from '../../../../services/api';
+import PaymentService from '../../../../services/payment';
+
+import { useAuth } from '../../../../hooks/auth';
 
 import './styles.css';
 
 function PaymentScreen() {
-  const history = useHistory();
-  const [cardName, setCardName] = useState('');
-  const [cardNumber, setCardNumber] = useState('');
-  const [cardExpiration, setCardExpiration] = useState('');
-  const [cardCvc, setCardCvc] = useState('');
-  const [creditCardHash, setHash] = useState('');
+  const [cardName, setCardName] = useState('Edilson Rocha Lima');
+  const [cardNumber, setCardNumber] = useState('5437598383685414');
+  const [cardExpiration, setCardExpiration] = useState('09/2022');
+  const [cardCvc, setCardCvc] = useState('193');
 
-  async function generateCardHash(cardData) {
-    const PUBLIC_TOKEN = '84EFB588CFAD58116FC279590C81BD0C545F336110FB1023431C4E505AD10D83';
-    const checkout = new window.DirectCheckout(PUBLIC_TOKEN, false);
+  const { user } = useAuth();
 
-    await checkout.getCardHash(cardData, cardHash => {
-      setHash(cardHash);
-    }, error => {
-      window.alert('Falha ao gerar o código hash');
-    });
-  }
+  useEffect(() => {
+    async function fetchUserData() {
+      const response = await api.get(`account/${user.id}`);
+      const { email, name, phoneNumber, cnpj } = response.data;
+      user['email'] = email;
+      user['name'] = name;
+      user['phoneNumber'] = phoneNumber;
+      user['cnpj'] = cnpj;
+      PaymentService.setUserDetails(user);
+    }
+
+    fetchUserData();
+  }, [user]);
 
   async function handleSubscribe() {
-    const { state } = history.location;
-    const cardData = {
-      cardNumber: cardNumber,
-      holderName: cardName,
-      securityCode: cardCvc,
-      expirationMonth: cardExpiration.split('/')[0],
-      expirationYear: cardExpiration.split('/')[1],
-    };
-
-    generateCardHash(cardData);
+    try {
+      PaymentService.setCardDetails({ cardName, cardNumber, cardExpiration, cardCvc });
+      await PaymentService.generateCardHash(window);
+      await PaymentService.signInAtJuno();
+      await PaymentService.subscribePlan();
+    } catch (error) {
+      window.alert('Não foi possível realizar sua assinatura');
+    }
   }
 
-  console.log(history.location.state);
   return (
     <div className="full-page-container">
-
       <div className="custom-card main">
         <header>
           <img className="logo" src="http://updata.com.br/chatup.png" alt="logo" />
