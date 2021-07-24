@@ -1,6 +1,8 @@
 import React, { useState } from 'react';
 import Stepper from 'react-stepper-horizontal';
 import { useHistory } from "react-router-dom";
+import InputMask from "react-input-mask";
+import PaymentService from '../../../../services/payment';
 
 import './styles.css';
 
@@ -17,18 +19,9 @@ function AddressScreen() {
   async function nextPaymentFunction() {
     if (cep === '' || street === '' || number === '' || hood === '' || city === '' || uf === '') {
       return window.alert('Todos os campos são obrigatórios');
-    } else {
-      return (
-        history.push('/payment/3', {
-          cep,
-          street,
-          number,
-          hood,
-          city,
-          uf
-        })
-      );
     }
+    PaymentService.setAddressDetails({ cep, street, number, hood, city, uf })
+    return history.push('/payment/3');
   }
 
   return (
@@ -59,7 +52,8 @@ function AddressScreen() {
         <form className="forms-sample">
           <div className="form-group">
             <label>CEP</label>
-            <input
+            <InputMask
+              mask="99999-999"
               value={cep}
               onChange={e => setCep(e.target.value)}
               placeholder="Informe seu CEP"
@@ -114,13 +108,35 @@ function AddressScreen() {
 
           <div className="form-group">
             <label>UF</label>
-            <input
-              value={uf}
-              onChange={e => setUf(e.target.value)}
-              placeholder="Informe sua UF"
-              type="text"
-              className="form-control"
-            />
+            <select name="estados-brasil" className="form-control" onChange={e => setUf(e.target.value)}>
+              <option value="AC">Acre</option>
+              <option value="AL">Alagoas</option>
+              <option value="AP">Amapá</option>
+              <option value="AM">Amazonas</option>
+              <option value="BA">Bahia</option>
+              <option value="CE">Ceará</option>
+              <option value="DF">Distrito Federal</option>
+              <option value="ES">Espírito Santo</option>
+              <option value="GO">Goiás</option>
+              <option value="MA">Maranhão</option>
+              <option value="MT">Mato Grosso</option>
+              <option value="MS">Mato Grosso do Sul</option>
+              <option value="MG">Minas Gerais</option>
+              <option value="PA">Pará</option>
+              <option value="PB">Paraíba</option>
+              <option value="PR">Paraná</option>
+              <option value="PE">Pernambuco</option>
+              <option value="PI">Piauí</option>
+              <option value="RJ">Rio de Janeiro</option>
+              <option value="RN">Rio Grande do Norte</option>
+              <option value="RS">Rio Grande do Sul</option>
+              <option value="RO">Rondônia</option>
+              <option value="RR">Roraima</option>
+              <option value="SC">Santa Catarina</option>
+              <option value="SP">São Paulo</option>
+              <option value="SE">Sergipe</option>
+              <option value="TO">Tocantins</option>
+            </select>
           </div>
 
           <button
